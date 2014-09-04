@@ -71,9 +71,9 @@ void Client::readConnection()
 
     qint8 type;
     quint16 length;
-    qint8 color_r;
-    qint8 color_g;
-    qint8 color_b;
+    quint8 color_r;
+    quint8 color_g;
+    quint8 color_b;
     in >> type >> length;
     qDebug() << type << length;
 
@@ -86,7 +86,6 @@ void Client::readConnection()
       break;
     case 0x20:
       in >> color_r >> color_g >> color_b;
-      qDebug() << color_r << color_g << color_b;;
       lightColor(QColor(color_r,color_g,color_b));
       break;
     default:
@@ -150,19 +149,16 @@ void Client::sessionOpened()
 void Client::lightOn()
 {
     ui->flash->setStyleSheet("QLineEdit{background: white;}");
-    qDebug() << "Client::lightOn()";
 }
 
 void Client::lightOff()
 {
     ui->flash->setStyleSheet("QLineEdit{background: black;}");
-    qDebug() << "Client::lightOff()";
 
 }
 
 void Client::lightColor(QColor color)
 {
-    qDebug() << color.red() << color.green() << color.blue();
     ui->flash->setStyleSheet(QString("QLineEdit{background: rgb(%1, %2,%3);}")
                              .arg(color.red()).arg(color.green()).arg(color.blue()));
     qDebug() << "Client::lightColor()";

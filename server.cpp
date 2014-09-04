@@ -113,8 +113,8 @@ void Server::sendFortune(qint8 type, quint16 length, bool isColor)
         out << (qint8)type << (quint16)length;
     else
         out << (qint8)type << (quint16)length
-            << (qint8)250 << (qint8)175
-            << (qint8)143;
+            << (quint8)250 << (quint8)175
+            << (quint8)143;
 
     QTcpSocket *clientConnection = tcpServer->nextPendingConnection();
     connect(clientConnection, SIGNAL(disconnected()),
